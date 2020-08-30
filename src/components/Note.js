@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import NotesContext from '../context';
 
 function Note({ note }) {
+	const { dispatch } = useContext(NotesContext);
+
 	return (
 		<div className="note">
 			<p>{note.text}</p>
 			<div className="btn-containter">
-				<div className="edit">Edit</div>
-				<div className="delete">Delete</div>
+				<button
+					onClick={() =>
+						dispatch({ type: 'SET_CURRENT_NOTE', payload: note })
+					}
+					className="edit"
+				>
+					Edit 2
+				</button>
+				<button className="delete">Delete</button>
 			</div>
 		</div>
 	);
