@@ -1,4 +1,4 @@
-import nanoid from 'nanoid';
+import { nanoid } from 'nanoid';
 
 export default function reducer(state, action) {
 	switch (action.type) {
@@ -16,6 +16,24 @@ export default function reducer(state, action) {
 			return {
 				...state,
 				currentNote: action.payload
+			};
+		case 'UPDATE_NOTE':
+			const updatedNote = {
+				...state.currentNote,
+				text: action.payload
+			};
+			const updatedNoteIndex = state.notes.findIndex(
+				note => note.id === state.currentNote.id
+			);
+
+			const updatedNotes = [
+				...state.notes.slice(0, updatedNoteIndex),
+				updatedNote,
+				...state.notes.slice(updatedNoteIndex + 1)
+			];
+			return {
+				currentNote: null,
+				notes: updatedNotes
 			};
 		case 'DELETE_NOTE':
 			const deletedNotes = state.notes.filter(

@@ -5,6 +5,7 @@ import notesReducer from './reducer';
 import Nav from './components/Nav';
 import AddNote from './components/AddNote';
 import NoteList from './components/NoteList';
+import EditNote from './components/EditNote';
 //import Nav from './com'
 
 function App() {
@@ -14,8 +15,14 @@ function App() {
 	return (
 		<NotesContext.Provider value={{ state, dispatch }}>
 			<Nav />
-			<AddNote />
-			<NoteList />
+			{state.currentNote === null ? (
+				<div>
+					<AddNote />
+					<NoteList />
+				</div>
+			) : (
+				<EditNote />
+			)}
 		</NotesContext.Provider>
 	);
 }
