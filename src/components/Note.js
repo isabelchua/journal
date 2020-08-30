@@ -10,13 +10,26 @@ function Note({ note }) {
 			<div className="btn-containter">
 				<button
 					onClick={() =>
-						dispatch({ type: 'SET_CURRENT_NOTE', payload: note })
+						dispatch({
+							type: 'SET_CURRENT_NOTE',
+							payload: note
+						})
 					}
 					className="edit"
 				>
 					Edit 2
 				</button>
-				<button className="delete">Delete</button>
+				<button
+					onClick={() =>
+						dispatch({
+							type: 'DELETE_NOTE',
+							payload: note.id
+						})
+					}
+					className="delete"
+				>
+					Delete
+				</button>
 			</div>
 		</div>
 	);
